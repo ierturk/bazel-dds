@@ -15,7 +15,8 @@ module(
     version = "1.0",
 )
 
-bazel_dep(name = "fastdds", version = "2.14.3.bcr.1")
+bazel_dep(name = "fastdds", version = "3.1.1")
+# bazel_dep(name = "fastdds", version = "2.14.3.bcr.1")
 # bazel_dep(name = "fastcdr", version = "2.2.2")
 
 bazel_dep(name = "rules_cc", version = "0.1.1", dev_dependency = True)

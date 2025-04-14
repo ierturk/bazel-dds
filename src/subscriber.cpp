@@ -1,4 +1,9 @@
-#include "HelloWorldPubSubTypes.h"
+
+#include "HelloWorldPubSubTypes.hpp"
+#include "HelloWorld.hpp"
+
+#include <thread>
+#include <iostream>
 
 #include <fastdds/dds/domain/DomainParticipantFactory.hpp>
 #include <fastdds/dds/domain/DomainParticipant.hpp>
@@ -7,8 +12,6 @@
 #include <fastdds/dds/subscriber/DataReader.hpp>
 #include <fastdds/dds/subscriber/DataReaderListener.hpp>
 #include <fastdds/dds/subscriber/SampleInfo.hpp>
-#include <iostream>
-#include <thread>
 
 
 using namespace eprosima::fastdds::dds;
@@ -20,7 +23,7 @@ public:
     void on_data_available(DataReader* reader) override {
         HelloWorldModule::HelloWorld data;
         SampleInfo info;
-        if (reader->take_next_sample(&data, &info) == ReturnCode_t::RETCODE_OK) {
+        if (reader->take_next_sample(&data, &info) == RETCODE_OK) {
             if (info.valid_data) {
                 std::cout << "Received: " << data.message() << std::endl;
             }
@@ -38,7 +41,7 @@ int main() {
     participant->register_type(type);
 
     // Create Topic
-    Topic* topic = participant->create_topic("HelloWorldTopic", "HelloWorld", TOPIC_QOS_DEFAULT);
+    Topic* topic = participant->create_topic("HelloWorldTopic", type->get_name(), TOPIC_QOS_DEFAULT);
 
     // Create Subscriber
     Subscriber* subscriber = participant->create_subscriber(SUBSCRIBER_QOS_DEFAULT);

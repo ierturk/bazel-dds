@@ -1,17 +1,20 @@
-#include "HelloWorldPubSubTypes.h"
+#include <iostream>
+#include <thread>
+
+#include "HelloWorld.hpp"
+#include "HelloWorldPubSubTypes.hpp"
 
 #include <fastdds/dds/domain/DomainParticipantFactory.hpp>
 #include <fastdds/dds/domain/DomainParticipant.hpp>
 #include <fastdds/dds/publisher/Publisher.hpp>
 #include <fastdds/dds/topic/Topic.hpp>
 #include <fastdds/dds/publisher/DataWriter.hpp>
-#include <iostream>
-#include <thread>
 
-using namespace eprosima::fastdds::dds;
 using namespace HelloWorldModule;
+using namespace eprosima::fastdds::dds;
 
 int main() {
+
     // Create DomainParticipant
     DomainParticipantQos participant_qos;
     DomainParticipant* participant = DomainParticipantFactory::get_instance()->create_participant(0, participant_qos);
@@ -21,7 +24,7 @@ int main() {
     participant->register_type(type);
 
     // Create Topic
-    Topic* topic = participant->create_topic("HelloWorldTopic", "HelloWorld", TOPIC_QOS_DEFAULT);
+    Topic* topic = participant->create_topic("HelloWorldTopic", type->get_name(), TOPIC_QOS_DEFAULT);
 
     // Create Publisher
     Publisher* publisher = participant->create_publisher(PUBLISHER_QOS_DEFAULT);

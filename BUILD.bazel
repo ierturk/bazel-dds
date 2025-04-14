@@ -5,12 +5,13 @@ genrule(
     name = "generate_hello_world",
     srcs = ["idl/HelloWorld.idl"],
     outs = [
-        "idl/HelloWorld.cxx",
-        "idl/HelloWorld.h",
-        "idl/HelloWorldPubSubTypes.cxx",
-        "idl/HelloWorldPubSubTypes.h",
-        "idl/HelloWorldCdrAux.ipp",
+        "idl/HelloWorld.hpp",
         "idl/HelloWorldCdrAux.hpp",
+        "idl/HelloWorldCdrAux.ipp",
+        "idl/HelloWorldPubSubTypes.cxx",
+        "idl/HelloWorldPubSubTypes.hpp",
+        "idl/HelloWorldTypeObjectSupport.cxx",
+        "idl/HelloWorldTypeObjectSupport.hpp",
     ],
     cmd = "fastddsgen -d $(RULEDIR) $<",
 )
@@ -19,14 +20,15 @@ genrule(
 cc_library(
     name = "hello_world_lib",
     srcs = [
-        "idl/HelloWorld.cxx",
         "idl/HelloWorldPubSubTypes.cxx",
+        "idl/HelloWorldTypeObjectSupport.cxx",
     ],
     hdrs = [
-        "idl/HelloWorld.h",
-        "idl/HelloWorldPubSubTypes.h",
-        "idl/HelloWorldCdrAux.ipp",
+        "idl/HelloWorld.hpp",
         "idl/HelloWorldCdrAux.hpp",
+        "idl/HelloWorldCdrAux.ipp",
+        "idl/HelloWorldPubSubTypes.hpp",
+        "idl/HelloWorldTypeObjectSupport.hpp",
     ],
     includes = ["idl"],  # Export the 'idl' directory for dependent targets
     deps = [

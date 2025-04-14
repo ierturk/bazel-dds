@@ -1,0 +1,56 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+# Generate code from the IDL file
+genrule(
+    name = "generate_hello_world",
+    srcs = ["idl/HelloWorld.idl"],
+    outs = [
+        "idl/HelloWorld.cxx",
+        "idl/HelloWorld.h",
+        "idl/HelloWorldPubSubTypes.cxx",
+        "idl/HelloWorldPubSubTypes.h",
+        "idl/HelloWorldCdrAux.ipp",
+        "idl/HelloWorldCdrAux.hpp",
+    ],
+    cmd = "cmd.exe /c \"fastddsgen.bat -ppDisable -d $(@D) $<\"",
+)
+
+# Library for the generated code
+cc_library(
+    name = "hello_world_lib",
+    srcs = [
+        "idl/HelloWorld.cxx",
+        "idl/HelloWorldPubSubTypes.cxx",
+    ],
+    hdrs = [
+        "idl/HelloWorld.h",
+        "idl/HelloWorldPubSubTypes.h",
+        "idl/HelloWorldCdrAux.ipp",
+        "idl/HelloWorldCdrAux.hpp",
+    ],
+    includes = ["idl"],  # Export the 'idl' directory for dependent targets
+    deps = [
+        "@fastdds//:fastdds",
+        # "@fastcdr//:fastcdr",
+    ],
+)
+
+# Publisher binary
+cc_binary(
+    name = "publisher",
+    srcs = ["src/publisher.cpp"],
+    deps = [":hello_world_lib"],
+)
+
+# Subscriber binary
+cc_binary(
+    name = "subscriber",
+    srcs = ["src/subscriber.cpp"],
+    deps = [":hello_world_lib"],
+)
+
+# Entry point binary
+cc_binary(
+    name = "entry",
+    srcs = ["src/entry.cpp"],
+)

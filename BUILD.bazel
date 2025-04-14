@@ -12,7 +12,7 @@ genrule(
         "idl/HelloWorldCdrAux.ipp",
         "idl/HelloWorldCdrAux.hpp",
     ],
-    cmd = "cmd.exe /c \"fastddsgen.bat -ppDisable -d $(@D) $<\"",
+    cmd = "fastddsgen -d $(RULEDIR) $<",
 )
 
 # Library for the generated code

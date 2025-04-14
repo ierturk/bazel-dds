@@ -6,6 +6,7 @@
 #include <fastdds/dds/topic/Topic.hpp>
 #include <fastdds/dds/publisher/DataWriter.hpp>
 #include <iostream>
+#include <thread>
 
 using namespace eprosima::fastdds::dds;
 using namespace HelloWorldModule;

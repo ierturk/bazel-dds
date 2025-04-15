@@ -1,5 +1,5 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
-load("@rules_rust//rust:defs.bzl", "rust_binary")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_test")
 
 # Generate code from the IDL file
 genrule(
@@ -58,9 +58,33 @@ cc_binary(
     srcs = ["src/entry.cpp"],
 )
 
+# Example C++ google test
+cc_test(
+    name = "test_cpp_gtest",
+    srcs = ["src/test_cpp_gtest.cpp"],
+    deps = ["@googletest//:gtest_main"],
+)
+
+# Example C++ boost test
+# cc_test(
+#     name = "test_cpp_boost_test",
+#     srcs = ["src/test_cpp_boost_test.cpp"],
+#     deps = ["@boost.test//:boost.test"],
+# )
+
+########################
+## Rust specific targets
+
 # Example Rust binary
 rust_binary(
     name = "entry_rust",
+    srcs = ["src/entry.rs"],
+    crate_root = "src/entry.rs",
+)
+
+# Example Rust test
+rust_test(
+    name = "test_rust",
     srcs = ["src/entry.rs"],
     crate_root = "src/entry.rs",
 )

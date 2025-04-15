@@ -47,7 +47,7 @@ int main() {
 
     // Create DataReader
     HelloWorldListener listener;
-    DataReader* reader = subscriber->create_datareader(topic, DATAREADER_QOS_DEFAULT, &listener);
+    subscriber->create_datareader(topic, DATAREADER_QOS_DEFAULT, &listener);
 
     // Wait for data
     std::cout << "Waiting for data..." << std::endl;

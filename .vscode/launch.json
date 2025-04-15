@@ -3,5 +3,17 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+        {
+            "name": "Debug entry_cpp",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/bazel-bin/entry_cpp",
+            "args": [],
+            "sourceMap": {
+              ".": "${workspaceFolder}"
+            },
+            "preLaunchTask": "build entry_cpp for debug"
+        }
+    ]
 }

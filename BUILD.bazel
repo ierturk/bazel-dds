@@ -1,4 +1,5 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@rules_rust//rust:defs.bzl", "rust_binary")
 
 # Generate code from the IDL file
 genrule(
@@ -53,6 +54,13 @@ cc_binary(
 
 # Entry point binary
 cc_binary(
-    name = "entry",
+    name = "entry_cpp",
     srcs = ["src/entry.cpp"],
+)
+
+# Example Rust binary
+rust_binary(
+    name = "entry_rust",
+    srcs = ["src/entry.rs"],
+    crate_root = "src/entry.rs",
 )

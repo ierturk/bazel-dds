@@ -66,11 +66,11 @@ cc_test(
 )
 
 # Example C++ boost test
-# cc_test(
-#     name = "test_cpp_boost_test",
-#     srcs = ["src/test_cpp_boost_test.cpp"],
-#     deps = ["@boost.test//:boost.test"],
-# )
+cc_test(
+    name = "test_cpp_boost_test",
+    srcs = ["src/test_cpp_boost_test.cpp"],
+    deps = ["@boost.test//:unit_test_main"],
+)
 
 ########################
 ## Rust specific targets

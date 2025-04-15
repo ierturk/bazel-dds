@@ -23,7 +23,7 @@ bazel_dep(name = "fastdds", version = "3.1.1")
 bazel_dep(name = "rules_cc", version = "0.1.1", dev_dependency = True)
 bazel_dep(name = "rules_rust", version = "0.60.0", dev_dependency = True)
 bazel_dep(name = "googletest", version = "1.16.0", dev_dependency = True)
-# bazel_dep(name = "boost.test", version = "1.87.0", dev_dependency = True)
+bazel_dep(name = "boost.test", version = "1.87.0", dev_dependency = True)
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 git_override(

@@ -22,10 +22,44 @@
             // }
         },
         {
+            "label": "Generate compile_commands.json",
+            "command": "bazel-compile-commands",
+            "args": [
+                "--bazelopt", "--config=debug_target",
+                "--bazelopt", "--config=opt_deps",
+                "--replace=-fno-canonical-system-headers=",
+                "--replace=-fno-canonical-system-headers=",
+                "//..."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "never",
+                "panel": "dedicated"
+            },
+            // "runOptions": {
+            //     "runOn": "folderOpen"
+            // }
+        },
+        {
             "label": "build entry_cpp for debug",
             "type": "shell",
             "command": "bazel",
             "args": ["build", "--config=debug_target", "--config=opt_deps", "//:entry_cpp"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build all targets for debug",
+            "type": "shell",
+            "command": "bazel",
+            "args": ["build", "--config=debug_target", "--config=opt_deps", "//..."],
             "group": {
                 "kind": "build",
                 "isDefault": true

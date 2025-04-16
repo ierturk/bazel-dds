@@ -17,15 +17,15 @@
                 "reveal": "never",
                 "panel": "dedicated"
             },
-            "runOptions": {
-                "runOn": "folderOpen"
-            }
+            // "runOptions": {
+            //     "runOn": "folderOpen"
+            // }
         },
         {
             "label": "build entry_cpp for debug",
             "type": "shell",
             "command": "bazel",
-            "args": ["build", "-c", "dbg", "//:entry_cpp"],
+            "args": ["build", "--config=debug_target", "--config=opt_deps", "//:entry_cpp"],
             "group": {
                 "kind": "build",
                 "isDefault": true

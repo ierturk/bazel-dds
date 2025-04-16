@@ -53,5 +53,14 @@ Received: Hello from Fast DDS!
 Received: Hello from Fast DDS!
 Received: Hello from Fast DDS!
 ```
+# Clangd Support
+To create file `compile_commands.json`
+```
+# with hedronvision/bazel-compile-commands-extractor
+$ bazel run @hedron_compile_commands//:refresh_all
+
+# or kiron1/bazel-compile-commands
+$ bazel-compile-commands --bazelopt "--config=debug_target" --bazelopt "--config=opt_deps" --replace=-fno-canonical-system-headers= //...
+```
 ## License
 This project is licensed under the BSD 3-Clause License, which permits use, distribution, and modification with proper attribution, while disclaiming liability and warranty. See the [LICENSE](./LICENSE) file for full details.

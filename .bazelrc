@@ -1,1 +1,7 @@
 build --noincompatible_disallow_empty_glob
+
+build:debug_target --compilation_mode=dbg
+build:debug_target --copt=-g
+build:debug_target --linkopt=-g
+
+build:opt_deps --compilation_mode=opt
